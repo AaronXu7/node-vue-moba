@@ -1,0 +1,247 @@
+<template>
+  <div class="create">
+    <h2 class="h2-title">{{ id ? '编辑' : '创建'}}英雄</h2>
+    <el-form label-width="80px" @submit.native.prevent="save">
+        <el-tabs type="border-card">
+            <el-tab-pane label="基本信息">
+                <el-form-item label="名称">
+                    <el-input v-model="model.name"/>
+                </el-form-item>
+                <el-form-item label="称号">
+                    <el-input v-model="model.title"/>
+                </el-form-item>
+                <el-form-item label="类型">
+                    <el-select v-model="model.categories" placeholder="请选择" multiple>
+                        <el-option 
+                            v-for="item of categories" 
+                            :key="item._id"
+                            :label="item.name"
+                            :value="item._id">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="头像">
+                    <el-upload
+                    class="avatar-uploader"
+                    :action="$http.defaults.baseURL + '/upload'"
+                    :show-file-list="false"
+                    :on-success="uploadImg"
+                    >
+                        <img v-if="model.avatar" :src="model.avatar" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
+                </el-form-item>
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="难度">
+                            <el-rate style="margin-top:.5rem;" :max="9" show-score v-model="model.scores.difficult"/>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="技能">
+                            <el-rate style="margin-top:.5rem;" :max="9" show-score v-model="model.scores.skill"/>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="攻击">
+                            <el-rate style="margin-top:.5rem;" :max="9" show-score v-model="model.scores.attack"/>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="生存">
+                            <el-rate style="margin-top:.5rem;" :max="9" show-score v-model="model.scores.survive"/>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-form-item label="顺风出装">
+                    <el-select v-model="model.items1" placeholder="请选择" multiple :multiple-limit="6">
+                        <el-option 
+                            v-for="item of items" 
+                            :key="item._id"
+                            :label="item.name"
+                            :value="item._id">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="逆风出装">
+                    <el-select v-model="model.items2" placeholder="请选择" multiple :multiple-limit="6">
+                        <el-option 
+                            v-for="item of items" 
+                            :key="item._id"
+                            :label="item.name"
+                            :value="item._id">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="使用技巧">
+                    <el-input type="textarea" v-model="model.usageTip"/>
+                </el-form-item>
+                <el-form-item label="对抗技巧">
+                    <el-input type="textarea" v-model="model.battleTip"/>
+                </el-form-item>
+                <el-form-item label="团战思路">
+                    <el-input type="textarea" v-model="model.teamIdea"/>
+                </el-form-item>
+            </el-tab-pane>
+            <el-tab-pane label="技能">
+                <el-button type="text" icon="el-icon-plus" @click="addSkills">添加技能</el-button>
+                <el-row :gutter="20">
+                    <el-col :span="12" class="skill-box" v-for="(item,index) in model.skills" :key="index">
+                        <el-form-item label="名称">
+                            <el-input v-model="item.name"/>
+                        </el-form-item>
+                        <el-form-item label="图标">
+                            <el-upload
+                            class="avatar-uploader"
+                            :action="$http.defaults.baseURL + '/upload'"
+                            :show-file-list="false"
+                            :on-success="res => $set(item,'icon',res.url)"
+                            >
+                                <img v-if="item.icon" :src="item.icon" class="avatar">
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-form-item>
+                        <el-row :gutter="20">
+                            <el-col :span="12">
+                                <el-form-item label="冷却值">
+                                    <el-input v-model="item.cd"/>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="消耗">
+                                    <el-input v-model="item.consume"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-form-item label="描述">
+                            <el-input type="textarea" v-model="item.description"/>
+                        </el-form-item>
+                        <el-form-item label="小提示">
+                            <el-input type="textarea" v-model="item.tips"/>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="danger" @click="model.skills.splice(index,1)">删除</el-button>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+            </el-tab-pane>
+        </el-tabs>
+        <el-form-item style="margin-top:1rem;text-align:right;" label-width="0">
+            <el-button type="primary" native-type="submit">保存</el-button>
+        </el-form-item>
+    </el-form>  
+  </div>
+</template>
+
+<script>
+export default {
+    name:'HeroesCreate',
+    props:{
+        id:{}
+    },
+    data(){
+        return {
+            categories:[],
+            items:[],
+            model:{
+                name:'',
+                avatar:'',
+                scores:{
+                    difficult:0,
+                    skill:0,
+                    attack:0,
+                    survive:0
+                },
+                skills:[]
+            },
+            parents:[]
+        }
+    },
+    methods:{
+        addSkills(){
+            if(this.model.skills.length + 1 > 4){
+                this.$message({
+                    message: '每个英雄仅拥有4个技能！',
+                    type: 'warning'
+                });
+            }else{
+                this.model.skills.push({})
+            }
+        },
+        uploadImg(res){
+            this.model.avatar = res.url
+        },
+        async save(){
+            if(this.id){
+                await this.$http.put(`/manage/heroes/${this.id}`,this.model)
+            }else{
+                if(this.parents.find(item => item.name == this.model.name)){
+                    this.$message({
+                        type: 'error',
+                        message: '物品已存在，请重新输入'
+                    })
+                }else{
+                    await this.$http.post('/manage/heroes',this.model)
+                }
+            }
+            this.$router.push('/heroes/list')
+            this.$message({
+                type: 'success',
+                message: '保存成功'
+            })
+            
+        },
+        async fetch(){
+            const res = await this.$http.get(`/manage/heroes/${this.id}`)
+            this.model = Object.assign({},this.model,res.data)
+        },
+        async fetchData(){
+            const res =await this.$http.get('/manage/heroes')
+            this.parents = res.data
+        },
+        async fetchCategories(){
+            const res =await this.$http.get('/manage/categories')
+            this.categories = res.data
+        },
+        async fetchItems(){
+            const res =await this.$http.get('/manage/items')
+            this.items = res.data
+        }
+    },
+    created(){
+        this.fetchData()
+        this.fetchItems()
+        this.fetchCategories()
+        this.id && this.fetch()
+    }
+}
+</script>
+
+<style>
+    .avatar-uploader .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .avatar-uploader .el-upload:hover {
+        border-color: #409EFF;
+    }
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 5rem;
+        height: 5rem;
+        line-height: 178px;
+        text-align: center;
+    }
+    .avatar {
+        width: 5rem;
+        height: 5rem;
+        display: block;
+    }
+    .skill-box{
+        padding: 20px 10px;
+    }
+</style>
