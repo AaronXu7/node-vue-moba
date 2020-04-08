@@ -1,62 +1,24 @@
 <template>
   <div class="list">
       <h2 class="h2-title">物品列表</h2>
-      <el-table :data="tableData" border>
-        <el-table-column prop="_id" label="ID" width="240"></el-table-column>
+      <list pathName="items" pathTitle="物品">
         <el-table-column prop="name" label="物品名称"></el-table-column>
         <el-table-column prop="icon" label="物品图标">
           <template slot-scope="scope">
             <img :src="scope.row.icon" alt="scope.row.name" style="height: 3rem;">
           </template>
         </el-table-column>
-        <el-table-column
-        fixed="right"
-        label="操作"
-        width="180">
-          <template slot-scope="scope">
-            <el-button type="text" 
-                        size="small"
-                        @click="$router.push(`/items/edit/${scope.row._id}`)">
-              编辑
-            </el-button>
-            <el-button type="text" 
-                        size="small"
-                        @click="remove(scope.row)">
-              删除
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+      </list>
   </div>
 </template>
 
 <script>
+import List from '../../components/List'
+
 export default {
   name:'ItemsList',
-  data(){
-    return {
-      tableData:[]
-    }
-  },
-  methods:{
-    async fetch(){
-      const res = await this.$http.get('/manage/items')
-      this.tableData = res.data
-    },
-    async remove(item){
-      this.$confirm(`是否确定删除物品“${item.name}”`,{ type:"warning" })
-        .then(async () => {
-          await this.$http.delete(`/manage/items/${item._id}`)
-          this.$message({
-              type: 'success',
-              message: '删除成功'
-          })
-          this.fetch()
-        })
-    }
-  },
-  created(){
-    this.fetch()
+  components:{
+    List
   }
 }
 </script>

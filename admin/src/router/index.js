@@ -3,7 +3,13 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
+  {
+    path:'/login',
+    name:'Login',
+    component: () => import('../views/Login/Login'),
+    meta:{ isPublic:true }
+  },
   {
     path: '/',
     name: 'Home',
@@ -56,15 +62,69 @@ Vue.use(VueRouter)
         path:'/Heroes/list',
         name:'HeroesList',
         component: () => import('../views/Heroes/HeroesList')
+      },
+      {
+        path:'/Articles/create',
+        name:'ArticlesCreate',
+        component: () => import('../views/Articles/ArticlesCreate')
+      },
+      {
+        path:'/Articles/edit/:id',
+        name:'ArticlesCreate',
+        props:true,
+        component: () => import('../views/Articles/ArticlesCreate')
+      },
+      {
+        path:'/Articles/list',
+        name:'ArticlesList',
+        component: () => import('../views/Articles/ArticlesList')
+      },
+      {
+        path:'/Ads/create',
+        name:'AdsCreate',
+        component: () => import('../views/Ads/AdsCreate')
+      },
+      {
+        path:'/Ads/edit/:id',
+        name:'AdsCreate',
+        props:true,
+        component: () => import('../views/Ads/AdsCreate')
+      },
+      {
+        path:'/Ads/list',
+        name:'AdsList',
+        component: () => import('../views/Ads/AdsList')
+      },
+      {
+        path:'/Users/create',
+        name:'UsersCreate',
+        component: () => import('../views/Users/UsersCreate')
+      },
+      {
+        path:'/Users/edit/:id',
+        name:'UsersCreate',
+        props:true,
+        component: () => import('../views/Users/UsersCreate')
+      },
+      {
+        path:'/Users/list',
+        name:'UsersList',
+        component: () => import('../views/Users/UsersList')
       }
     ]
   }
 ]
-
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to,from,next) => {
+  if(!to.meta.isPublic && !localStorage.token){
+    return next('/login')
+  }
+  next()
 })
 
 export default router

@@ -12,12 +12,5 @@ export default {
 </script>
 
 <style>
-  *{
-    padding: 0;
-    margin: 0;
-  }
-  .h2-title{
-    color: #606266;
-    padding-bottom: 20px;
-  }
+
 </style>

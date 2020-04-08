@@ -15,7 +15,7 @@
         <el-form-item label="名称">
             <el-input v-model="model.name"/>
         </el-form-item>
-        <el-form-item>
+        <el-form-item  class="save-btn">
             <el-button type="primary" native-type="submit">保存</el-button>
         </el-form-item>
     </el-form>  

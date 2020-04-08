@@ -2,6 +2,9 @@ const express = require('express')
 
 const app = express()
 
+// token
+app.set('secret','aslkdh123hoh')
+
 // 跨域模块
 app.use(require('cors')())
 // 设置数据格式

@@ -23,7 +23,8 @@
                 <el-form-item label="头像">
                     <el-upload
                     class="avatar-uploader"
-                    :action="$http.defaults.baseURL + '/upload'"
+                    :action="uploadURL"
+                    :headers="getAuthorization()"
                     :show-file-list="false"
                     :on-success="uploadImg"
                     >
@@ -93,7 +94,8 @@
                         <el-form-item label="图标">
                             <el-upload
                             class="avatar-uploader"
-                            :action="$http.defaults.baseURL + '/upload'"
+                            :action="uploadURL"
+                            :headers="getAuthorization()"
                             :show-file-list="false"
                             :on-success="res => $set(item,'icon',res.url)"
                             >
@@ -126,7 +128,7 @@
                 </el-row>
             </el-tab-pane>
         </el-tabs>
-        <el-form-item style="margin-top:1rem;text-align:right;" label-width="0">
+        <el-form-item class="save-btn" label-width="0">
             <el-button type="primary" native-type="submit">保存</el-button>
         </el-form-item>
     </el-form>  
@@ -175,14 +177,7 @@ export default {
             if(this.id){
                 await this.$http.put(`/manage/heroes/${this.id}`,this.model)
             }else{
-                if(this.parents.find(item => item.name == this.model.name)){
-                    this.$message({
-                        type: 'error',
-                        message: '物品已存在，请重新输入'
-                    })
-                }else{
-                    await this.$http.post('/manage/heroes',this.model)
-                }
+                await this.$http.post('/manage/heroes',this.model)
             }
             this.$router.push('/heroes/list')
             this.$message({
@@ -218,30 +213,5 @@ export default {
 </script>
 
 <style>
-    .avatar-uploader .el-upload {
-        border: 1px dashed #d9d9d9;
-        border-radius: 6px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    }
-    .avatar-uploader .el-upload:hover {
-        border-color: #409EFF;
-    }
-    .avatar-uploader-icon {
-        font-size: 28px;
-        color: #8c939d;
-        width: 5rem;
-        height: 5rem;
-        line-height: 178px;
-        text-align: center;
-    }
-    .avatar {
-        width: 5rem;
-        height: 5rem;
-        display: block;
-    }
-    .skill-box{
-        padding: 20px 10px;
-    }
+    
 </style>
