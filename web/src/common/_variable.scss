@@ -1,0 +1,84 @@
+// color
+$colors:(
+    "primary":#db9e3f,
+    "info":#4b67af,
+    "white":#fff,
+    "smoke":#f9f9f9,
+    "light":#d4d9de,
+    "grey-0":#343440,
+    "grey-1":#222,
+    "grey-2":#666,
+    "grey-3":#999,
+    "black":#000
+);
+$primary-color:map-get($colors, "primary");
+$border-color:map-get($colors, "light");
+
+// font-size
+$base-font-size:1rem;
+$font-sizes:(
+    // 10px
+    xs:0.7692,
+    // 12px
+    sm:0.9231,
+    // 13px
+    md:1,
+    // 14px
+    lg:1.0769,
+    // 16px
+    xl:1.2308,
+    // 25px
+    xxl:1.9231
+);
+
+// flex
+$justify:(
+    start:flex-start,
+    end:flex-end,
+    center:center,
+    between:space-between,
+    around:space-around,
+    evenly:space-evenly
+);
+$align:(
+    start:flex-start,
+    end:flex-end,
+    center:center,
+    stretch:stretch
+);
+$wraps:(
+    wrap:wrap,
+    nowrap:nowrap,
+    reverse:wrap-reverse
+);
+
+// cow-width
+$base-width:1%;
+$widths:(
+  '1':100,
+  '2':50,
+  '3':33.3333,
+  '4':25,
+  '5':20
+);
+
+// 间隔
+$spacing-types: (
+  m: margin,
+  p: padding,
+);
+$spacing-directions: (
+  t: top,
+  r: right,
+  b: bottom,
+  l: left,
+);
+$spacing-base-size: 1rem;
+$spacing-sizes: (
+  0: 0,
+  1: 0.25,
+  2: 0.5,
+  3: 1,
+  4: 1.5,
+  5: 3,
+);

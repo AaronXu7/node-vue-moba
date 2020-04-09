@@ -9,6 +9,8 @@ const schema = new mongooes.Schema({
             return require('bcryptjs').hashSync(val,10)
         }
     }
+},{
+    timestamps:true
 })
 
 module.exports = mongooes.model('User',schema)

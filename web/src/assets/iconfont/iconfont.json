@@ -1,0 +1,58 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "129319",
+      "name": "news",
+      "font_class": "news",
+      "unicode": "e8f1",
+      "unicode_decimal": 59633
+    },
+    {
+      "icon_id": "372210",
+      "name": "cc-menu-circle",
+      "font_class": "cc-menu-circle",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "1555842",
+      "name": "video",
+      "font_class": "video",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "2115842",
+      "name": "weapons",
+      "font_class": "weapons",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "8620142",
+      "name": "text",
+      "font_class": "text",
+      "unicode": "e7ab",
+      "unicode_decimal": 59307
+    },
+    {
+      "icon_id": "13037216",
+      "name": "tag",
+      "font_class": "tag",
+      "unicode": "e69e",
+      "unicode_decimal": 59038
+    },
+    {
+      "icon_id": "13487499",
+      "name": "dots-horizontal",
+      "font_class": "dots-horizontal",
+      "unicode": "e727",
+      "unicode_decimal": 59175
+    }
+  ]
+}

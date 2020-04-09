@@ -1,7 +1,10 @@
+@import './variable';
+
 // reset
 *{
     box-sizing: border-box;
     outline: none;
+    touch-action: none;
 }
 html{
     font-size: 13px;
@@ -10,23 +13,15 @@ body{
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.5;
+    line-height: 1.3;
     background: #F1F1F1;
 }
 a{
     color:#999;
+    text-decoration: none;
 }
 
 // color
-$colors:(
-    "primary":#db9e3f,
-    "white":#fff,
-    "smoke":#f9f9f9,
-    "grey-0":#343440,
-    "grey-1":#222,
-    "grey-3":#999,
-    "black":#000
-);
 @each $colorKey,$color in $colors {
     .text-#{$colorKey}{
         color:$color
@@ -34,68 +29,49 @@ $colors:(
     .bg-#{$colorKey}{
         background-color:$color
     }
+    .br-#{$colorKey}{
+        border-color:$color
+    }
+}
+
+// width，height
+@each $widthKey,$width in $widths {
+    .w-#{$widthKey}{
+        width: $width * $base-width;
+    }
+}
+.h-100{
+    height: 100%;
 }
 
 // font-size
-$base-font-size:1rem;
-$font-sizes:(
-    // 10px
-    xs:0.7692,
-    // 12px
-    sm:0.9231,
-    // 13px
-    md:1,
-    // 14px
-    lg:1.0769,
-    // 16px
-    xl:1.2308
-);
 @each $sizeKey,$size in $font-sizes {
     .fs-#{$sizeKey}{
-        font-size: $size * $base-font-size;
+        font-size: $size * $base-font-size!important;
     }
 }
 
 // text
 @each $var in (left,center,right) {
     .text-#{$var}{
-        text-align: $var;
+        text-align: $var !important;
     }
 }
 
 // flex
-$justify:(
-    start:flex-start,
-    end:flex-end,
-    center:center,
-    between:space-between,
-    around:space-around,
-    evenly:space-evenly
-);
 @each $jfKey,$jf in $justify {
     .flex-#{$jfKey}{
         display: flex;
         justify-content: $jf;
     }
 }
-$align:(
-    start:flex-start,
-    end:flex-end,
-    center:center,
-    stretch:stretch
-);
 @each $alKey,$al in $align {
     .f-align-#{$alKey}{
         align-items: $al;
     }
 }
-$wraps:(
-    wrap:wrap,
-    nowrap:nowrap,
-    reverse:wrap-reverse
-);
 @each $wrapKey,$wrap in $wraps {
-    .f-wrap-#{$wrapKey}{
+    .f-#{$wrapKey}{
         flex-wrap: $wrap;
     }
 }
@@ -111,25 +87,7 @@ $wraps:(
 // spacing
 // 0-5: 0
 // .mt-1  => margin top  .pb-2
-$spacing-types: (
-  m: margin,
-  p: padding,
-);
-$spacing-directions: (
-  t: top,
-  r: right,
-  b: bottom,
-  l: left,
-);
-$spacing-base-size: 1rem;
-$spacing-sizes: (
-  0: 0,
-  1: 0.25,
-  2: 0.5,
-  3: 1,
-  4: 1.5,
-  5: 3,
-);
+
 @each $typeKey, $type in $spacing-types {
     // .m-1
     @each $sizeKey, $size in $spacing-sizes {
@@ -156,4 +114,110 @@ $spacing-sizes: (
         }
         }
     }
+}
+
+// button
+.btn{
+    border:none;
+    border-radius:0.1538rem;
+    font-size: map-get($font-sizes, 'xs') * $base-font-size;
+    padding: .4rem .6rem;
+}
+
+// nav
+.nav{
+    .nav-items{
+        color:map-get($colors, 'white');
+        border-bottom: 3px solid transparent;
+        padding-bottom: .1rem;
+        &.active{
+            border-color: map-get($colors, 'white');
+        }
+    }
+    &.nav-reverse{
+        .nav-items{
+            color:map-get($colors, 'grey-1');
+            &.active{
+                color:map-get($colors, 'primary');
+                border-color: map-get($colors, 'primary');
+            }
+        }
+    }
+}
+
+// sprite
+.sprite{
+    background: url('../assets/img/sprite.png') no-repeat 0 0;
+    background-size: 28.8462rem;
+    display: inline-block;
+    &.sp-news{
+        background-position: 63.546% 15.517%;
+        width: 1.7692rem;
+        height: 1.5385rem;
+    }
+    &.sp-story{
+        background-position: 90.483% 15.614%;
+        width: 1.7692rem;
+        height: 1.5385rem;
+    }
+    &.sp-mall{
+        background-position: 36.746% 0.924%;
+        width: 1.4615rem;
+        height: 1.6923rem;
+    }
+    &.sp-ex{
+        background-position: 10.408% 15.517%;
+        width: 1.5385rem;
+        height: 1.5385rem;
+    }
+    &.sp-fish{
+        background-position: 89.733% 1.266%;
+        width: 1.5385rem;
+        height: 1.6154rem;
+    }
+    &.sp-honor{
+        background-position: 36.467% 15.287%;
+        width: 1.8462rem;
+        height: 1.5385rem;
+    }
+    &.sp-sims{
+        background-position: 9.302% 0.813%;
+        width: 2.3846rem;
+        height: 1.9231rem;
+    }
+    &.sp-camp{
+        background-position: 63.3% 0.927%;
+        width: 1.8462rem;
+        height: 1.8462rem;
+    }
+    &.sp-wechat{
+        background-position: 0 96.207%;
+        width: 1.8462rem;
+        height: 1.5385rem;
+    }
+    &.sp-arrow{
+        background-position: 38.577% 52.076%;
+        width: 0.7692rem;
+        height: 0.7692rem;
+    }
+}
+
+// border
+.border-y{
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+}
+
+// 翻转
+.a-rotate{
+    transition: .3s;
+    transform: rotate(180deg);
+}
+
+// text-overflow
+.text-ellipsis{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
