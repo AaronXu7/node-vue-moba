@@ -20,6 +20,13 @@
       "unicode_decimal": 58994
     },
     {
+      "icon_id": "470877",
+      "name": "back",
+      "font_class": "back",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
       "icon_id": "1555842",
       "name": "video",
       "font_class": "video",
@@ -39,6 +46,13 @@
       "font_class": "text",
       "unicode": "e7ab",
       "unicode_decimal": 59307
+    },
+    {
+      "icon_id": "12321168",
+      "name": "回形针",
+      "font_class": "huixingzhen",
+      "unicode": "e626",
+      "unicode_decimal": 58918
     },
     {
       "icon_id": "13037216",

@@ -5,6 +5,11 @@ const schema = new mongooes.Schema({
     avatar:{ type:String },
     title:{ type:String },
     categories:[{ type:mongooes.SchemaTypes.ObjectId,ref:'Categories' }],
+    banner:{ type:String },
+    skins:[{ 
+        name:{ type:String },
+        src:{ type:String }
+    }],
     scores:{
         difficult:{ type:Number },
         skill:{ type:Number },

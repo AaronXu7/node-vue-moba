@@ -31,6 +31,11 @@
     height: 5rem;
     display: block;
 }
+.avatar-h{
+    max-width: 10rem;
+    height: auto;
+    display: block;
+}
 .skill-box{
     padding: 20px 10px;
 }

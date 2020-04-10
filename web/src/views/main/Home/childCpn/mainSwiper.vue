@@ -1,18 +1,8 @@
 <template>
   <swiper ref="mainSwiper" :options="swiperOptions">
-    <swiper-slide>
-        <a href="">
-            <img class="w-1" src="../../../../assets/img/swiper (1).jpeg" alt="">
-        </a>
-    </swiper-slide>
-    <swiper-slide>
-        <a href="">
-            <img class="w-1" src="../../../../assets/img/swiper (2).jpeg" alt="">
-        </a>
-    </swiper-slide>
-    <swiper-slide>
-        <a href="">
-            <img class="w-1" src="../../../../assets/img/swiper (3).jpeg" alt="">
+    <swiper-slide v-for="item in swiperData" :key="item.index">
+        <a :href="item.href">
+            <img class="w-1" :src="item.img" :alt="item.title">
         </a>
     </swiper-slide>
     <div class="swiper-pagination main-swiper text-right pr-3" slot="pagination"></div>
@@ -29,8 +19,18 @@ export default {
             el: '.swiper-pagination.main-swiper'
           },
           autoplay: true
-        }
+        },
+        swiperData:[]
       }
+    },
+    methods:{
+      async fetch(){
+        const res = await this.$http.get('/ad/list')
+        this.swiperData = res.data[0].items
+      }
+    },
+    created(){
+      this.fetch()
     }
 }
 </script>

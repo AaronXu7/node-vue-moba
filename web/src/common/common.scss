@@ -40,7 +40,7 @@ a{
         width: $width * $base-width;
     }
 }
-.h-100{
+.h-1{
     height: 100%;
 }
 
@@ -207,6 +207,9 @@ a{
     border-top: 1px solid $border-color;
     border-bottom: 1px solid $border-color;
 }
+.border-b{
+    border-bottom: 1px solid $border-color;
+}
 
 // 翻转
 .a-rotate{
@@ -220,4 +223,11 @@ a{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+// img100%
+.img-1{
+    img{
+        width: 100%;
+    }
 }

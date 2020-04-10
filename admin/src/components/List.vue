@@ -1,5 +1,17 @@
 <template>
     <div id="list">
+      <div class="search">
+        <el-autocomplete
+          class="inline-input"
+          v-model="keyword"
+          :fetch-suggestions="querySearch"
+          :placeholder="`请输入要查找的${pathTitle}`"
+          @select="handleSelect"
+        >
+          <el-button slot="append" icon="el-icon-search"></el-button>
+        </el-autocomplete>
+      </div>
+      
       <el-table :data="listItems" border>
         <el-table-column prop="_id" label="ID" width="240"></el-table-column>
         <slot />
@@ -8,16 +20,16 @@
         label="操作"
         width="180">
             <template slot-scope="scope">
-            <el-button type="text" 
-                        size="small"
-                        @click="$router.push(`/${pathName}/edit/${scope.row._id}`)">
-                编辑
-            </el-button>
-            <el-button type="text" 
-                        size="small"
-                        @click="remove(scope.row)">
-                删除
-            </el-button>
+              <el-button type="text" 
+                          size="small"
+                          @click="$router.push(`/${pathName}/edit/${scope.row._id}`)">
+                  编辑
+              </el-button>
+              <el-button type="text" 
+                          size="small"
+                          @click="remove(scope.row)">
+                  删除
+              </el-button>
             </template>
         </el-table-column>
       </el-table>
@@ -53,7 +65,9 @@ export default {
     return {
       tableData:[],
       currentPage: 1,
-      pageSize:8
+      pageSize:8,
+      keyword:'',
+      searchAll:[]
     }
   },
   computed:{
@@ -63,6 +77,33 @@ export default {
     }
   },
   methods:{
+    async toSearch(){
+      if(this.keyword == ''){
+        this.fetch()
+      }else{
+        const res = await this.$http.get(`/manage/${this.pathName}/search/${this.keyword}`)
+        this.tableData = res.data
+      }
+    },
+    querySearch(queryString, cb) {
+      const searchAll = this.searchAll;
+      const results = queryString ? searchAll.filter(this.createFilter(queryString)) : searchAll;
+      // 调用 callback 返回建议列表的数据
+      cb(results);
+    },
+    createFilter(queryString) {
+      return (search) => {
+        return (search.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+      };
+    },
+    loadAll() {
+      return this.tableData.map(item => {
+        return { 'value' : (!item.name) ? item.title :item.name}
+      });
+    },
+    handleSelect(item) {
+      console.log(item);
+    },
     handleSizeChange(val) {
       this.pageSize = val
     },
@@ -87,10 +128,22 @@ export default {
   },
   created(){
     this.fetch()
+  },
+  watch:{
+    tableData(){
+      this.searchAll = this.loadAll();
+    },
+    keyword(){
+      this.toSearch()
+    }
   }
 }
 </script>
 
 <style>
-
+  .search{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
 </style>

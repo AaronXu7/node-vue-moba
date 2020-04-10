@@ -4,12 +4,16 @@
                 icon="cc-menu-circle"
                 :itemData="itemData">
                 <template #card="{ items }">
-                    <div v-for="i in items" :key="i.index" class="news-item py-2 fs-lg flex-start">
+                    <router-link tag="div"  
+                                 v-for="i in items" 
+                                 :key="i.index"
+                                 :to="`/article/${i._id}`"
+                                 class="news-item py-2 fs-lg flex-start">
                         <span class="text-grey-2">[{{ i.categoryName }}]</span>
                         <span class="px-1">|</span>
                         <span class="f-1 text-ellipsis">{{ i.title }}</span>
                         <span class="fs-sm text-grey-2">{{ i.createdAt | showDate }}</span>
-                    </div>
+                    </router-link>
                 </template>   
         </ax-card>
     </div>

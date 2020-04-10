@@ -23,9 +23,10 @@
                             @current='$refs.cardSwiper.$swiper.slideTo($event)'/>
             </nav-bar>
             <swiper ref="cardSwiper"
+                    :options="{ autoHeight:true }"
                     @slide-change="() => currentIndex = $refs.cardSwiper.$swiper.realIndex">
-                <swiper-slide v-for="i in itemData" :key="i.index">
-                    <slot name="card" :items='i.newsList'></slot>
+                <swiper-slide v-for="i in itemData" :key="i.index" :class="slotClass">
+                    <slot name="card" :items='i.dataList'></slot>
                 </swiper-slide>
             </swiper>
         </div>
@@ -57,6 +58,10 @@ export default {
             default(){
                 return []
             }
+        },
+        slotClass:{
+            type:String,
+            default:''
         }
     },
     data(){

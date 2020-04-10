@@ -40,7 +40,7 @@ module.exports = app => {
         if (req.Model.modelName === 'Categories') {
             queryOptions.populate = 'parent'
         }
-        const items = await req.Model.find().setOptions(queryOptions).limit(100)
+        const items = await req.Model.find().setOptions(queryOptions).limit(300)
         res.send(items)
     })
 
@@ -49,6 +49,14 @@ module.exports = app => {
         const model = await req.Model.findById(req.params.id)
         res.send(model)
 
+    })
+
+    //搜索指定资源 
+    router.get('/search/:keyword',async (req,res) => {
+        const model = await req.Model.find().where({
+            name:{ $regex:req.params.keyword }
+        })
+        res.send(model)
     })
 
     // 数据模型判断
