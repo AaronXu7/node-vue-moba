@@ -5,6 +5,7 @@
                 :itemData="itemData"
                 :slotClass="'flex-start f-wrap'"
                 :isShow="show">
+                <img slot="card-ad" class="w-1" :src="ad[0].img" :alt="ad[0].title">
                 <template #card="{ items }">
                     <router-link tag="div" 
                                 v-for="i in items" :key="i.index" 
@@ -30,12 +31,15 @@ export default {
     },
     data(){
         return {
-            itemData:[]
+            itemData:[],
+            ad:[]
         }
     },
     methods:{
         async fetchData(){
             const res = await this.$http.get('/hero/list')
+            const ads = await this.$http.get('/ad/list')
+            this.ad = ads.data[1].items
             this.itemData = res.data
         }
     },
