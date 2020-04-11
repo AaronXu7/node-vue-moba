@@ -43,6 +43,9 @@ a{
 .h-1{
     height: 100%;
 }
+.h-a{
+    height: auto;
+}
 
 // font-size
 @each $sizeKey,$size in $font-sizes {
@@ -134,11 +137,37 @@ a{
             border-color: map-get($colors, 'white');
         }
     }
+    .nav-circle{
+        width: 5rem;
+        height: 5rem;
+        img{
+            width: 100%;
+        }
+        &.active{
+            color:map-get($colors, 'primary');
+            border-radius: 50%;
+            border: 2px solid;
+            border-color: map-get($colors, 'white');
+        }
+    }
     &.nav-reverse{
         .nav-items{
             color:map-get($colors, 'grey-1');
             &.active{
                 color:map-get($colors, 'primary');
+                border-color: map-get($colors, 'primary');
+            }
+        }
+        .nav-circle{
+            width: 5rem;
+            height: 5rem;
+            img{
+                width: 100%;
+            }
+            &.active{
+                color:map-get($colors, 'primary');
+                border-radius: 50%;
+                border: 2px solid;
                 border-color: map-get($colors, 'primary');
             }
         }
@@ -209,6 +238,9 @@ a{
 }
 .border-b{
     border-bottom: 1px solid $border-color;
+}
+.border-c{
+    border-radius: 50%;
 }
 
 // 翻转

@@ -48,6 +48,55 @@
       "unicode_decimal": 59307
     },
     {
+      "icon_id": "11275203",
+      "name": "circle-cent",
+      "font_class": "circle-cent",
+      "unicode": "e8c2",
+      "unicode_decimal": 59586
+    },
+    {
+      "icon_id": "11275227",
+      "name": "circle-flag",
+      "font_class": "circle-flag",
+      "unicode": "e8cd",
+      "unicode_decimal": 59597
+    },
+    {
+      "icon_id": "11275228",
+      "name": "circle-flag_1",
+      "font_class": "circle-flag_",
+      "unicode": "e8ce",
+      "unicode_decimal": 59598
+    },
+    {
+      "icon_id": "11275248",
+      "name": "circle-paper",
+      "font_class": "circle-paper",
+      "unicode": "e8d6",
+      "unicode_decimal": 59606
+    },
+    {
+      "icon_id": "11275263",
+      "name": "circle-star",
+      "font_class": "circle-star",
+      "unicode": "e8df",
+      "unicode_decimal": 59615
+    },
+    {
+      "icon_id": "11275264",
+      "name": "circle-stop",
+      "font_class": "circle-stop",
+      "unicode": "e8e0",
+      "unicode_decimal": 59616
+    },
+    {
+      "icon_id": "11275276",
+      "name": "circle-view",
+      "font_class": "circle-view",
+      "unicode": "e8e5",
+      "unicode_decimal": 59621
+    },
+    {
       "icon_id": "12321168",
       "name": "回形针",
       "font_class": "huixingzhen",

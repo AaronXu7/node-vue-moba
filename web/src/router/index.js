@@ -35,6 +35,31 @@ Vue.use(VueRouter)
         component: () => import('../views/main/Article/Article')
       }
     ]
+  },
+  {
+    path:'/hero',
+    name:'Hero',
+    component: () => import('../views/main/Hero/Hero'),
+    children:[
+      {
+        path: '/hero/detail/:id',
+        name: 'HeroDetail',
+        props:true,
+        component: () => import('../views/main/Hero/HeroDetail/HeroDetail')
+      },
+      {
+        path: '/hero/skins/:id',
+        name: 'HeroSkins',
+        props:true,
+        component: () => import('../views/main/Hero/HeroSkins/HeroSkins')
+      },
+      {
+        path: '/hero/list',
+        name: 'HeroList',
+        props:true,
+        component: () => import('../views/main/Hero/HeroList/HeroList')
+      }
+    ]
   }
 ]
 

@@ -125,8 +125,11 @@ module.exports = app => {
     })
     // 获取英雄详情
     router.get('/hero/list/:id',async (req,res) => {
-        const data = await Hero.findById(req.params.id).lean()
-        data
+        const data = await  Hero
+                            .findById(req.params.id)
+                            .populate('categories items1 items2 partners.hero weak.hero strong.hero')
+                            .lean()
+        res.send(data)
     })
     router.get('/article/list/:id',async (req,res) => {
         const data = await Article.findById(req.params.id).lean()

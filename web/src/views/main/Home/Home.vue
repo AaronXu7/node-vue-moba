@@ -7,7 +7,7 @@
     <!-- 新闻资讯 -->
     <news />
     <!-- 英雄列表  -->
-    <hero />
+    <heroes />
   </div>
 </template>
 
@@ -15,7 +15,7 @@
 import mainSwiper from './childCpn/mainSwiper'
 import linkNav from './childCpn/linkNav'
 import News from './childCpn/News'
-import Hero from './childCpn/Hero'
+import Heroes from '../../../components/content/Heroes'
 
 export default {
     name:'Home',
@@ -23,7 +23,7 @@ export default {
         mainSwiper,
         linkNav,
         News,
-        Hero
+        Heroes
     }
 }
 </script>

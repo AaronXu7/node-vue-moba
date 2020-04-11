@@ -1,7 +1,9 @@
 // color
 $colors:(
     "primary":#db9e3f,
+    "whitesmoke":#f1f1f1,
     "info":#4b67af,
+    "danger":#791a16,
     "white":#fff,
     "smoke":#f9f9f9,
     "light":#d4d9de,
@@ -9,7 +11,8 @@ $colors:(
     "grey-1":#222,
     "grey-2":#666,
     "grey-3":#999,
-    "black":#000
+    "black":#000,
+    
 );
 $primary-color:map-get($colors, "primary");
 $border-color:map-get($colors, "light");
@@ -60,6 +63,7 @@ $widths:(
   '3':33.3333,
   '4':25,
   '5':20,
+  '6':16.66,
   '80':80,
   '70':70,
   '90':90,
