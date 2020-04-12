@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
     lintOnSave: false,
+    outputDir: __dirname + '/../server/static/web',
     configureWebpack: {
         resolve: {
             alias: {
